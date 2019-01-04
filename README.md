@@ -26,5 +26,7 @@ MVP is users can be made, login, and register and post to comics they subscribe 
 
 Post mvp is user images, calendar functionality
 
+##ERD 
+![ERD](/ERD.jpeg)
 
 
