@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :posts
-  has_many :comics, through: :users_comic
+  has_and_belongs_to_many :comics 
 has_secure_password
  validates :username, presence: true
 
