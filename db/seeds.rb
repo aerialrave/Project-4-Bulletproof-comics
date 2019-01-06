@@ -46,3 +46,4 @@ password_confirmation: "bullet"
 # @action.posts << @post1
 
 @doom.posts << @post2
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
