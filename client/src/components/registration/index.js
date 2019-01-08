@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class Registration extends Component {
 
@@ -8,7 +9,7 @@ class Registration extends Component {
     this.state={
         username:'',
         password:'',
-        password_confirmation:''
+        password_confirmation:'',
         formData: {
        username:'',
        password:'',
@@ -64,7 +65,7 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="username"
-                  value={this.formData.username}
+                  value={this.state.formData.username}
                   onChange={this.handleChange}
                   placeholder="username"
                   className='username'
@@ -74,25 +75,25 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="password"
-                  value={this.formData.password}
-                  onChange={props.handleChange}
+                  value={this.state.formData.password}
+                  onChange={this.handleChange}
                   placeholder="password"
                   className='password'
                 />
 
-                </Input>
+
 
                 <Label className="password_confirmation">Password confirmation</Label>
                 <Input
                   type="text"
                   name="password_confirmation"
-                  value={this.formData.password_confirmation}
-                  onChange={props.handleChange}
+                  value={this.state.formData.password_confirmation}
+                  onChange={this.handleChange}
                   placeholder="password_confirmation"
                   className='password_confirmation'
                 />
 
-                </Input>
+
 
 
               </FormGroup>

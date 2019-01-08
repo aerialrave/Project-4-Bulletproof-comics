@@ -6,8 +6,7 @@ class Comics extends Component {
   constructor(props){
     super(props);
     this.state={
-        username:'',
-        password:'',
+        comic:[],
         formData: {
        username:'',
        password:''

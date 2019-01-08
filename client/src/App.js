@@ -25,33 +25,30 @@ class App extends Component {
     }
     this.handleView = this.handleView.bind(this);
     this.viewControl = this.viewControl.bind(this);
-
+    this.handleuser = this.handleuser.bind(this);
   }
 
+//view functions
   handleView(view){
 this.setState(
   {currentview: view}
     )}
 
-
-
-
-
 viewControl(){
 const view = this.state.currentview;
 switch(view) {
 
-  case 'sign-in': return <Sign  />
-  break;
+  case 'sign-in': return <Sign usr={this.state.usr} />
 
-  case 'comics': return <Comics  />
-  break;
+
+  case 'comics': return <Comics usr={this.state.usr} />
+
 
   case 'registration': return <Registration  />
-  break;
 
-  case 'user_page': return <User_page  />
-  break;
+
+  //case 'user_page': return <User_page usr={this.state.usr} />
+
 
     default: return <Welcome />
 
@@ -59,11 +56,18 @@ switch(view) {
 
 }
 
+handleuser(user){
+  this.setState(
+      {usr:user}
+  )}
+
+
+
   render() {
     return (
       <div className="App">
           <NavBar handleView={this.handleView} />
-          {this.viewControl(this.state.currentview)}
+          {this.viewControl()}
 
 
       </div>

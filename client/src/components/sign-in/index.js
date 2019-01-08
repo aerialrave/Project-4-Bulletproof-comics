@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class Sign extends Component {
 
@@ -53,16 +54,16 @@ this.setState(prevState => ({
 
 
               <Form
-                onSubmit={props.submitRecipe}
-                id="add-recipe-form">
-                  <h5> Add Recipe </h5>
+                onSubmit={this.handleSubmit}
+                id="sign-in-form">
+                  <h5> Sign in </h5>
                   <FormGroup>
 
                 <Label className="username">Username</Label>
                 <Input
                   type="text"
                   name="username"
-                  value={this.formData.username}
+                  value={this.state.formData.username}
                   onChange={this.handleChange}
                   placeholder="username"
                   className='username'
@@ -72,13 +73,13 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="password"
-                  value={this.formData.username}
-                  onChange={props.handleChange}
+                  value={this.state.formData.password}
+                  onChange={this.handleChange}
                   placeholder="password"
                   className='password'
                 />
 
-                </Input>
+
 
               </FormGroup>
               <Button class='submit-button' id='add-recipe-submit' outline color="info">Add Recipe</Button>
