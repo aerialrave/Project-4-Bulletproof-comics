@@ -42,8 +42,11 @@ password_confirmation: "bullet"
 
 @post1 = @gabriel.posts.create!(body: "This comic is awesome", comic_id: @action.id)
 @post2 = @hank.posts.create!(body: "I like the art", comic_id: @doom.id)
-##associating posts to comics
-# @action.posts << @post1
 
-@doom.posts << @post2
+
+##associating users to Comics
+@gabriel.comics << @action
+@hank.comics << @doom
+
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

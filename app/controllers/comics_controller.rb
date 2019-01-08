@@ -5,12 +5,12 @@ class ComicsController < ApiController
   def index
     @comics = Comic.all
 
-    render json: @comics
+    render json: @comics.to_json(:include => :posts)
   end
 
   # GET /comics/1
   def show
-    render json: @comic
+    render json: @comic.to_json(:include => :posts)
   end
 
   # POST /comics
