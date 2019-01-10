@@ -17,26 +17,11 @@ class Comics_Posts extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.setUID = this.setUID.bind(this);
-    this.setCID = this.setCID.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-setCID(cid){
-  this.setState(
-  {
-    post:{
-      comic_id:cid}}
-    )
-}
 
-setUID(uid){
-  this.setState({
-    post:{
-      user_id: uid
-    }
-  })
-
-    }
 
 componentDidMount(){
   const jwt = localStorage.getItem('Token');
@@ -93,18 +78,101 @@ this.setState(prevState => ({
         }
         console.log(data);
 
-        let  yourConfig = {
-            headers: {
-                Authorization: "Bearer " + jwt
-              },
-          data: data
-          }
 
-const response = await axios.post(`${this.props.BASE_URL}/posts`,yourConfig)
+const response = await axios({
+  method:'post',
+  url:`${this.props.BASE_URL}/posts`,
+  data: data,
+  headers:{
+    'Authorization': `Bearer ${jwt}`
+  }
+});
+
+
       }catch(e){
         console.log(e);
       }
     }
+
+
+
+
+
+    async handleEdit(id) {
+
+        try{
+            const jwt = localStorage.getItem('Token');
+            console.log("jwt is "+ jwt);
+          const token = decode(localStorage.getItem('Token'));
+
+          this.setState(
+          {
+            post:{
+              comic_id: this.props.selected.id,
+              user_id: token.sub
+            }
+          }
+            )
+
+          const data ={
+            post: this.state.post
+          }
+          console.log(data);
+
+
+  const response = await axios({
+    method:'put',
+    url:`${this.props.BASE_URL}/posts/${id}`,
+    data: data,
+    headers:{
+      'Authorization': `Bearer ${jwt}`
+    }
+  });
+
+
+        }catch(e){
+          console.log(e);
+        }
+      }
+
+
+
+      async handleDelete(id) {
+
+          try{
+              const jwt = localStorage.getItem('Token');
+              console.log("jwt is "+ jwt);
+            const token = decode(localStorage.getItem('Token'));
+
+            this.setState(
+            {
+              post:{
+                comic_id: this.props.selected.id,
+                user_id: token.sub
+              }
+            }
+              )
+
+            const data ={
+              post: this.state.post
+            }
+            console.log(data);
+
+
+      const response = await axios({
+      method:'delete',
+      url:`${this.props.BASE_URL}/posts/${id}`,
+      data: data,
+      headers:{
+        'Authorization': `Bearer ${jwt}`
+      }
+      });
+
+
+          }catch(e){
+            console.log(e);
+          }
+        }
 
 
 
@@ -142,6 +210,10 @@ const response = await axios.post(`${this.props.BASE_URL}/posts`,yourConfig)
                   <div key={posts.id} >
                     <h2>{posts.user_id}</h2>
                     <p>{posts.body}</p>
+
+                    <button onClick={() => this.handleEdit(`${posts.id}`)}>edit post</button>
+
+                    <button onClick={() => this.handleDelete(`${posts.id}`)}>delete post</button>
                   </div> )}
 
                 </div>
