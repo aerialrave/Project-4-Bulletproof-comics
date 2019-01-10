@@ -7,11 +7,12 @@ import NavBar from './components/navbar';
 import Footer from './components/footer';
 import Sign from './components/sign-in';
 import Comics from './components/comics';
+import Comics_Posts from './components/comic_posts';
 import Registration from './components/registration';
+import User_Page from './components/user_page';
 
 
-
-const BASE_URL = ''
+const BASE_URL = 'http://localhost:3001/api'
 
 class App extends Component {
 
@@ -21,11 +22,13 @@ class App extends Component {
       currentview:'',
       fetchstring: '',
       usr:[],
+      selected:{},
       loggedin: false
     }
     this.handleView = this.handleView.bind(this);
     this.viewControl = this.viewControl.bind(this);
     this.handleuser = this.handleuser.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
 //view functions
@@ -37,17 +40,17 @@ this.setState(
 viewControl(){
 const view = this.state.currentview;
 switch(view) {
-
-  case 'sign-in': return <Sign usr={this.state.usr} />
-
-
-  case 'comics': return <Comics usr={this.state.usr} />
+  // add tokens where needed for comics_posts and probably user_page
+  case 'sign-in': return <Sign usr={this.state.usr}  handleusr={this.handleusr} handleView={this.handleView} BASE_URL={BASE_URL} />
 
 
-  case 'registration': return <Registration  />
+  case 'comics': return <Comics usr={this.state.usr} BASE_URL={BASE_URL} handleView={this.handleView} handleSelect={this.handleSelect} />
 
+  case 'registration': return <Registration handleusr={this.handleusr} BASE_URL={BASE_URL}/>
 
-  //case 'user_page': return <User_page usr={this.state.usr} />
+  case 'comics_posts': return <Comics_Posts selected={this.state.selected} BASE_URL={BASE_URL}  />
+
+  //case 'user_page': return <User_page usr={this.state.usr} BASE_URL={BASE_URL} />
 
 
     default: return <Welcome />
@@ -61,6 +64,11 @@ handleuser(user){
       {usr:user}
   )}
 
+handleSelect(select){
+  this.setState(
+    {selected:select}
+  )
+}
 
 
   render() {

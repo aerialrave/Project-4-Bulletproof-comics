@@ -10,7 +10,7 @@ class Registration extends Component {
         username:'',
         password:'',
         password_confirmation:'',
-        formData: {
+        user: {
        username:'',
        password:'',
        password_confirmation:''
@@ -26,8 +26,8 @@ class Registration extends Component {
 const{ name, value } = e.target;
 this.setState(prevState => ({
   prevState,
-  formData: {
-    ...prevState.formData,
+  user: {
+    ...prevState.user,
     [name]: value
   }
 }));
@@ -36,13 +36,14 @@ this.setState(prevState => ({
   async handleSubmit(e) {
       e.preventDefault();
       try{
+        const data ={
+          user:this.state.user
+        }
 
+const response = await axios.post(`${this.props.BASE_URL}/users`,data)
       }catch(e){
         console.log(e);
       }
-
-
-
     }
 
 
@@ -65,7 +66,7 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="username"
-                  value={this.state.formData.username}
+                  value={this.state.user.username}
                   onChange={this.handleChange}
                   placeholder="username"
                   className='username'
@@ -75,7 +76,7 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="password"
-                  value={this.state.formData.password}
+                  value={this.state.user.password}
                   onChange={this.handleChange}
                   placeholder="password"
                   className='password'
@@ -87,7 +88,7 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="password_confirmation"
-                  value={this.state.formData.password_confirmation}
+                  value={this.state.user.password_confirmation}
                   onChange={this.handleChange}
                   placeholder="password_confirmation"
                   className='password_confirmation'
@@ -97,7 +98,7 @@ this.setState(prevState => ({
 
 
               </FormGroup>
-              <Button class='submit-button' id='add-recipe-submit' outline color="info">Add Recipe</Button>
+              <Button className='submit-button' id='add-recipe-submit' outline color="info">Submit</Button>
               </Form>
 
       </div>

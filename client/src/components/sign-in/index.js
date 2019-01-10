@@ -9,7 +9,7 @@ class Sign extends Component {
     this.state={
         username:'',
         password:'',
-        formData: {
+        auth: {
        username:'',
        password:''
      }
@@ -23,9 +23,9 @@ class Sign extends Component {
   handleChange = (e) => {
 const{ name, value } = e.target;
 this.setState(prevState => ({
-  prevState,
-  formData: {
-    ...prevState.formData,
+  ...prevState,
+  auth: {
+    ...prevState.auth,
     [name]: value
   }
 }));
@@ -35,12 +35,16 @@ this.setState(prevState => ({
       e.preventDefault();
       try{
 
+        const data ={
+          auth:this.state.auth
+        }
+
+        const response = await axios.post(`${this.props.BASE_URL}/user_token`,data)
+          console.log(response.data.jwt);
+        localStorage.setItem('Token',response.data.jwt);
       }catch(e){
         console.log(e);
       }
-
-
-
     }
 
 
@@ -50,7 +54,6 @@ this.setState(prevState => ({
     return (
       <div >
         <h1> Sign in to Bulletproof Pull list</h1>
-
 
 
               <Form
@@ -63,7 +66,7 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="username"
-                  value={this.state.formData.username}
+                  value={this.state.auth.username}
                   onChange={this.handleChange}
                   placeholder="username"
                   className='username'
@@ -73,16 +76,15 @@ this.setState(prevState => ({
                 <Input
                   type="text"
                   name="password"
-                  value={this.state.formData.password}
+                  value={this.state.auth.password}
                   onChange={this.handleChange}
                   placeholder="password"
                   className='password'
                 />
 
 
-
               </FormGroup>
-              <Button class='submit-button' id='add-recipe-submit' outline color="info">Add Recipe</Button>
+              <Button class='submit-button' id='add-recipe-submit' outline color="info">submit</Button>
               </Form>
 
       </div>

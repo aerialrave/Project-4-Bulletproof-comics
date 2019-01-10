@@ -2,20 +2,32 @@ import React from 'react';
 import Bulletitle from './bulletproof-title.png'
 export default function NavBar(props){
 return(
-<div id="navst">
+<nav id="navst" className="navbar">
+<div className="container">
+  <div className="navbar-brand">
+      <a className="navbar-item" onClick={() =>props.handleView('welcome')} > <img src={Bulletitle} /> </a>
+    </div>
 
-<img src={Bulletitle} onClick={() =>props.handleView('welcome')}  />
+<div className="navbar-menu" id="navMenu">
+  <div className="navbar-end">
 
-<button onClick={() =>props.handleView('about')} >About</button>
+    <div className="navbar-item had-dropdown is-hoverable">
+      <a className="navbar-link">Menu</a>
+      <div className="navbar-dropdown is-right">
+<a className="navbar-item" onClick={() =>props.handleView('about')} >About</a>
 
-<button onClick={() =>props.handleView('comics')}  >Comics</button>
+<a className="navbar-item" onClick={() =>props.handleView('comics')}  >Comics</a>
 
-<button onClick={() =>props.handleView('sign-in')}  >Sign-in</button>
+<a className="navbar-item" onClick={() =>props.handleView('sign-in')}  >Sign-in</a>
 
-<button onClick={() =>props.handleView('registration')}  >Register</button>
+<a className="navbar-item" onClick={() =>props.handleView('registration')}  >Register</a>
 
-<button onClick={() =>props.handleView('user_page')}  >User Console</button>
-
-</div>
+<a className="navbar-item" onClick={() =>props.handleView('user_page')}  >User Console</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
   )
 }
