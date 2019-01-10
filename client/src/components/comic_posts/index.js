@@ -202,19 +202,23 @@ const response = await axios({
               </Form>
 
               <div>
-                <h2>{this.props.selected.title}</h2>
+                <h2 className="title is-2">{this.props.selected.title}</h2>
 
 
-                <div>
+                <div className="block">
+
                   {this.props.selected.posts.map(posts =>
-                  <div key={posts.id} >
-                    <h2>{posts.user_id}</h2>
-                    <p>{posts.body}</p>
+                  <article key={posts.id} className="message is-info">
+                    <div className="message-header">
+                    <p>{posts.user_id}</p>
+                  </div>
+                  <div className="message-body">
+                    {posts.body}
+                  </div>
+                    <button className="button is-info" onClick={() => this.handleEdit(`${posts.id}`)}>edit post</button>
 
-                    <button onClick={() => this.handleEdit(`${posts.id}`)}>edit post</button>
-
-                    <button onClick={() => this.handleDelete(`${posts.id}`)}>delete post</button>
-                  </div> )}
+                    <button className="button is-warning" onClick={() => this.handleDelete(`${posts.id}`)}>delete post</button>
+                  </article> )}
 
                 </div>
 
