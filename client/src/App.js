@@ -12,7 +12,7 @@ import Registration from './components/registration';
 import User_Page from './components/user_page';
 
 
-const BASE_URL = 'http://localhost:3001/api'
+const BASE_URL = '/api'
 
 class App extends Component {
 
