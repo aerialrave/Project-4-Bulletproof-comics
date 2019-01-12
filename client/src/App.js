@@ -4,6 +4,7 @@ import axios from 'axios';
 // import pages for test of site
 import Welcome from './components/welcome';
 import NavBar from './components/navbar';
+import About from './components/about';
 import Footer from './components/footer';
 import Sign from './components/sign-in';
 import Comics from './components/comics';
@@ -12,7 +13,7 @@ import Registration from './components/registration';
 import User_Page from './components/user_page';
 
 
-const BASE_URL = '/api'
+const BASE_URL = 'http://localhost:3001/api'
 
 class App extends Component {
 
@@ -41,8 +42,10 @@ viewControl(){
 const view = this.state.currentview;
 switch(view) {
   // add tokens where needed for comics_posts and probably user_page
-  case 'sign-in': return <Sign usr={this.state.usr}  handleusr={this.handleusr} handleView={this.handleView} BASE_URL={BASE_URL} />
 
+case 'about': return <About usr={this.state.usr}  handleusr={this.handleusr} handleView={this.handleView} BASE_URL={BASE_URL} />
+
+  case 'sign-in': return <Sign usr={this.state.usr}  handleusr={this.handleusr} handleView={this.handleView} BASE_URL={BASE_URL} />
 
   case 'comics': return <Comics usr={this.state.usr} BASE_URL={BASE_URL} handleView={this.handleView} handleSelect={this.handleSelect} />
 
