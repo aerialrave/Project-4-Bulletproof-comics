@@ -16,7 +16,14 @@ return(
       <div className="navbar-dropdown is-right">
 <a className="navbar-item" onClick={() =>props.handleView('about')} >About</a>
 
-<a className="navbar-item" onClick={() =>props.handleView('comics')}  >Comics</a>
+<a className="navbar-item" onClick={() =>{
+  if(!localStorage.getItem("Token")) {
+   props.handleView('sign-in');
+   alert('Sign in to view posts');
+ } else {
+   props.handleView('comics');
+ }
+}}>Comics</a>
 
 <a className="navbar-item" onClick={() =>props.handleView('sign-in')}  >Sign-in</a>
 
