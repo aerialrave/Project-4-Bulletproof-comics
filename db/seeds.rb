@@ -49,4 +49,5 @@ password_confirmation: "bullet"
 @hank.comics << @doom
 
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') 
+AdminUser.create!(email: 'Bullet@Bulletproof.com', password: 'action', password_confirmation: 'action')
