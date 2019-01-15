@@ -32,15 +32,14 @@ const token = decode(localStorage.getItem('Token'));
  console.log( token);
 // this.setCID(this.props.selected.id);
 this.setState(
-{
-  post:{
-    comic_id: this.props.selected.id,
-    user_id: token.sub
-  }
-}
-  )
-
-}
+      {
+        post:{
+          comic_id: this.props.selected.id,
+          user_id: token.sub
+            }
+          }
+            )
+          }
 
   handleChange = (e) => {
 const{ name, value } = e.target;
@@ -55,7 +54,6 @@ this.setState(prevState => ({
   async handleSubmit(e) {
       e.preventDefault();
       try{
-
           const jwt = localStorage.getItem('Token');
           console.log("jwt is "+ jwt);
         const token = decode(localStorage.getItem('Token'));
@@ -64,18 +62,18 @@ this.setState(prevState => ({
          console.log( token);
         // this.setCID(this.props.selected.id);
         this.setState(
-        {
+          {
           post:{
             comic_id: this.props.selected.id,
             user_id: token.sub
-          }
-        }
+              }
+            }
           )
       //  console.log("Comic id in state from parent"+ this.props.selected.id)
 
         const data ={
           post: this.state.post
-        }
+            }
         console.log(data);
 
 
@@ -89,6 +87,10 @@ const response = await axios({
 });
 
 
+    const refresh = await axios.get(`${this.props.BASE_URL}/comics/${this.state.post.comic_id}`);
+      //console.log(`selected is: ${this.props.selected}` );
+      //console.log(`refresh is: ${refresh}`);
+      this.props.handleSelect(refresh.data);
       }catch(e){
         console.log(e);
       }
@@ -98,8 +100,8 @@ const response = await axios({
 
 
 
-    async handleEdit(id) {
-
+    async handleEdit(e,id) {
+          e.preventDefault();
         try{
             const jwt = localStorage.getItem('Token');
             console.log("jwt is "+ jwt);
@@ -120,14 +122,18 @@ const response = await axios({
           console.log(data);
 
 
-  const response = await axios({
-    method:'put',
-    url:`${this.props.BASE_URL}/posts/${id}`,
-    data: data,
-    headers:{
-      'Authorization': `Bearer ${jwt}`
-    }
-  });
+      const response = await axios({
+        method:'put',
+        url:`${this.props.BASE_URL}/posts/${id}`,
+        data: data,
+        headers:{
+          'Authorization': `Bearer ${jwt}`
+        }
+      });
+      console.log(response.data);
+      const refresh = await axios.get(`${this.props.BASE_URL}/comics/${this.state.post.comic_id}`);
+      console.log(refresh.data);
+      this.props.handleSelect(refresh.data);
 
 
         }catch(e){
@@ -137,8 +143,8 @@ const response = await axios({
 
 
 
-      async handleDelete(id) {
-
+      async handleDelete(e,id) {
+              e.preventDefault();
           try{
               const jwt = localStorage.getItem('Token');
               console.log("jwt is "+ jwt);
@@ -159,16 +165,17 @@ const response = await axios({
             console.log(data);
 
 
-      const response = await axios({
-      method:'delete',
-      url:`${this.props.BASE_URL}/posts/${id}`,
-      data: data,
-      headers:{
-        'Authorization': `Bearer ${jwt}`
-      }
-      });
+            const response = await axios({
+            method:'delete',
+            url:`${this.props.BASE_URL}/posts/${id}`,
+            data: data,
+            headers:{
+              'Authorization': `Bearer ${jwt}`
+            }
+            });
 
-
+            const refresh = await axios.get(`${this.props.BASE_URL}/comics/${this.state.post.comic_id}` );
+            this.props.handleSelect(refresh.data);
           }catch(e){
             console.log(e);
           }
@@ -180,7 +187,7 @@ const response = await axios({
   render() {
     return (
       <div >
-        <h1> Comic board</h1>
+        <h1 fontFamily= "impact"> Comic board</h1>
               <Form
                 onSubmit={this.handleSubmit}
                 id="register form">
@@ -210,24 +217,20 @@ const response = await axios({
                   {this.props.selected.posts.map(posts =>
                   <article key={posts.id} className="message is-info">
                     <div className="message-header">
-                    <p>{posts.user_id}</p>
+                    <p>{posts.user.username}</p>
                   </div>
                   <div className="message-body">
                     {posts.body}
                   </div>
-                    <button className="button is-info" onClick={() => this.handleEdit(`${posts.id}`)}>edit post</button>
+                    <button className="button is-info" onClick={async (e) => this.handleEdit(e,`${posts.id}`)}>edit post</button>
 
-                    <button className="button is-warning" onClick={() => this.handleDelete(`${posts.id}`)}>delete post</button>
+                    <button className="button is-warning" onClick={async (e) => this.handleDelete(e,`${posts.id}`)}>delete post</button>
                   </article> )}
 
                 </div>
 
 
-
               </div>
-
-
-
 
 
 

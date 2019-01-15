@@ -40,9 +40,12 @@ this.setState(prevState => ({
           user:this.state.user
         }
 
-const response = await axios.post(`${this.props.BASE_URL}/users`,data)
+        const response = await axios.post(`${this.props.BASE_URL}/users`,data)
+          alert('Registration succeeded: sign in');
+        this.props.handleView('sign-in');
       }catch(e){
         console.log(e);
+        alert('Registration failed: ' + e);
       }
     }
 

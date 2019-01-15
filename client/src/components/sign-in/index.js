@@ -42,8 +42,12 @@ this.setState(prevState => ({
         const response = await axios.post(`${this.props.BASE_URL}/user_token`,data)
           console.log(response.data.jwt);
         localStorage.setItem('Token',response.data.jwt);
+        this.props.handleView('comics');
+         alert('Login succeeded: ' + this.state.auth.username);
+
       }catch(e){
         console.log(e);
+         alert('Login failed: ' + e);
       }
     }
 
@@ -84,7 +88,7 @@ this.setState(prevState => ({
 
 
               </FormGroup>
-              <Button class='submit-button' id='add-recipe-submit' outline color="info">submit</Button>
+              <Button className='submit-button' id='add-recipe-submit' outline color="info">submit</Button>
               </Form>
 
       </div>

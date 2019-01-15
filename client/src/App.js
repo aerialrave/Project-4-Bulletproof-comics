@@ -13,7 +13,7 @@ import Registration from './components/registration';
 import User_Page from './components/user_page';
 
 
-const BASE_URL = 'http://localhost:3001/api'
+const BASE_URL = '/api'
 
 class App extends Component {
 
@@ -22,7 +22,7 @@ class App extends Component {
     this.state={
       currentview:'',
       fetchstring: '',
-      usr:[],
+      usr:{},
       selected:{},
       loggedin: false
     }
@@ -49,15 +49,13 @@ case 'about': return <About usr={this.state.usr}  handleusr={this.handleusr} han
 
   case 'comics': return <Comics usr={this.state.usr} BASE_URL={BASE_URL} handleView={this.handleView} handleSelect={this.handleSelect} />
 
-  case 'registration': return <Registration handleusr={this.handleusr} BASE_URL={BASE_URL}/>
+  case 'registration': return <Registration handleusr={this.handleusr} handleView={this.handleView}  BASE_URL={BASE_URL} />
 
-  case 'comics_posts': return <Comics_Posts selected={this.state.selected} BASE_URL={BASE_URL}  />
+  case 'comics_posts': return <Comics_Posts selected={this.state.selected} handleSelect={this.handleSelect} BASE_URL={BASE_URL}  />
 
-  //case 'user_page': return <User_page usr={this.state.usr} BASE_URL={BASE_URL} />
-
+  case 'user_page': return <User_Page usr={this.state.usr} BASE_URL={BASE_URL} handleView={this.handleView}  />
 
     default: return <Welcome />
-
     }
 
 }
@@ -77,10 +75,11 @@ handleSelect(select){
   render() {
     return (
       <div className="App">
+        <div className="container">
           <NavBar handleView={this.handleView} />
           {this.viewControl()}
-
-
+          <Footer />
+        </div>
       </div>
     );
   }

@@ -22,7 +22,13 @@ return(
 
 <a className="navbar-item" onClick={() =>props.handleView('registration')}  >Register</a>
 
-<a className="navbar-item" onClick={() =>props.handleView('user_page')}  >User Console</a>
+<a className="navbar-item" onClick={() =>{
+   if(!localStorage.getItem("Token")) {
+    props.handleView('sign-in');
+  } else {
+    props.handleView('user_page');
+  }
+}}  >User Console</a>
           </div>
         </div>
       </div>

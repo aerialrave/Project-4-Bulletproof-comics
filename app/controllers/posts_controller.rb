@@ -6,12 +6,12 @@ class PostsController < ApiController
   def index
     @posts = Post.all
 
-    render json: @posts
+    render json: @posts.to_json(:include => :user)
   end
 
   # GET /posts/1
   def show
-    render json: @post
+    render json: @post.to_json(:include => :user)
   end
 
   # POST /posts
