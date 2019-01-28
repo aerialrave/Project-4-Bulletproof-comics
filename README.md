@@ -1,5 +1,5 @@
 # Project-4-Bulletproof-comics
-Pull list site for a comic book shop
+Pull list site for a comic book shop, the purpose is to allow shop owners to put up 
 
 
 ## Overview
@@ -18,7 +18,7 @@ react bulma - css framework
 
 Users can register, select comics, post on comics they can select
 
-Admin can alter pages, users and db
+Admin can alter pages, users, posts, and db.
 
 ## MVP
 
